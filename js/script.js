@@ -1,4 +1,4 @@
-const totalSpent = 5550;
+const totalSpent = 550;
 let payment = 7000;
 let discount = 0;
 if (totalSpent < 100) {
