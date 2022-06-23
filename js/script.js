@@ -1,80 +1,86 @@
-const users = [
+const restaurants = [
   {
-    name: 'Moore Hensley',
-    email: 'moorehensley@indexia.com',
-    eyeColor: 'blue',
-    friends: ['Sharron Pace'],
-    isActive: false,
-    balance: 2811,
-    gender: 'male',
-    age: 37,
+    order: [],
+    brand: 'KFC',
+    menu: {
+      chicken: 50,
+      burger: 50,
+    },
+    deliveryTime: 60,
   },
   {
-    name: 'Sharlene Bush',
-    email: 'sharlenebush@tubesys.com',
-    eyeColor: 'blue',
-    friends: ['Briana Decker', 'Sharron Pace'],
-    isActive: true,
-    balance: 3821,
-    gender: 'female',
-    age: 34,
+    order: [],
+    brand: 'McDonalds',
+    menu: {
+      cola: 25,
+      burger: 30,
+    },
+    deliveryTime: 30,
   },
   {
-    name: 'Ross Vazquez',
-    email: 'rossvazquez@xinware.com',
-    eyeColor: 'green',
-    friends: ['Marilyn Mcintosh', 'Padilla Garrison', 'Naomi Buckner'],
-    isActive: false,
-    balance: 3793,
-    gender: 'male',
-    age: 24,
-  },
-  {
-    name: 'Elma Head',
-    email: 'elmahead@omatom.com',
-    eyeColor: 'green',
-    friends: ['Goldie Gentry', 'Aisha Tran'],
-    isActive: true,
-    balance: 2278,
-    gender: 'female',
-    age: 21,
-  },
-  {
-    name: 'Carey Barr',
-    email: 'careybarr@nurali.com',
-    eyeColor: 'blue',
-    friends: ['Jordan Sampson', 'Eddie Strong'],
-    isActive: true,
-    balance: 3951,
-    gender: 'male',
-    age: 27,
-  },
-  {
-    name: 'Blackburn Dotson',
-    email: 'blackburndotson@furnigeer.com',
-    eyeColor: 'brown',
-    friends: ['Jacklyn Lucas', 'Linda Chapman'],
-    isActive: false,
-    balance: 1498,
-    gender: 'male',
-    age: 38,
-  },
-  {
-    name: 'Sheree Anthony',
-    email: 'shereeanthony@kog.com',
-    eyeColor: 'brown',
-    friends: ['Goldie Gentry', 'Briana Decker'],
-    isActive: true,
-    balance: 2764,
-    gender: 'female',
-    age: 39,
+    order: [],
+    brand: 'Burger King',
+    menu: {
+      burgerXXL: 170,
+      burger: 70,
+    },
+    deliveryTime: 20,
   },
 ];
-const friendName = 'Goldie Gentry';
 
-const getUsersWithFriend = (users, friendName) => {
-  return users
-    .filter(user, index, friends => user.friends)
-    .filter(user => user.friends === friendName);
+const services = {
+  showMenu() {
+    const keys = Object.keys(restaurants);
+    console.log(keys);
+    for (const key of this.menu) {
+      console.log(`${key} price ${this.menu[key]}`);
+    }
+  },
+  getMenu() {
+    return restaurants.find(el => el.brand === this.chosenRestaurant).menu;
+  },
+  addOrder() {
+    this.order.push(order);
+  },
+  confirmOrder() {
+    const deliveryTime = restaurants.find(el => el.brand === this.chosenRestaurant).deliveryTime;
+
+    alert(`You booked ${this.order.join("")}. Wait for your delivery ${deliveryTime} in minutes.`)
+  },
 };
-getUsersWithFriend(users, friendName);
+
+const torpedaDelivery = {
+  order: [],
+  chosenRestaurant: '',
+  getAvailableRestaurants() {
+    return restaurants.map(el => el.brand = );
+  },
+  chooseRestaurant() {
+    const availableRestaurants = this.getAvailableRestaurants();
+    const restaurant = prompt(Hi there! Here are available restaurants: ${ availableRestaurant.join(" , ") });
+    
+    if (availableRestaurants.includes(restaurant)) {
+      this.chosenRestaurant === restaurant;
+
+      const restaurantEntity = restaurants.find(el => el.brand === restaurant);
+
+      services.showMenu.call(restaurantEntity);
+
+      this.chooseDishes();
+    } else {
+      alert(there is no such a restaurant);
+    }
+  }
+  chooseDishes() {
+    const dish = prompt(Choose a dish!);
+    services.getMenu.call(this);
+
+    if (menu.hasOwnProperty(dish)) {
+      services.addOrder.call(this, dish);
+      services.confirmOrder.call(this)
+    } else {
+      alert(there is no such a dish!);
+    }
+  },
+};
+torpedaDelivery.chooseRestaurant();
