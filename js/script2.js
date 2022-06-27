@@ -1,4 +1,6 @@
-const x = 'And';
-const y = 'rii';
-const z = x + y;
-console.log(z);
+const animals = ['pigs', 'goats', 'sheep'];
+
+function foo(name) {
+  return animals.filter(animal => animal !== name);
+}
+console.log(foo('pigs'));
