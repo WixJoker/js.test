@@ -1,54 +1,51 @@
-class Hamburger {
-    static const DB = {
-        stuffing: {
-            STUFFING_SALAD: {
-                type: "STUFFING_SALAD",
-                price: 300,
-                ccal: 200,
-            },
-            STUFFING_POTATO: {
-                type: "STUFFING_POTATO",
-                price: 400,
-                ccal: 100,
-            },
-            TOPPING_MAYO: {
-                type: "TOPPING_MAYO",
-                price: 300,
-                ccal: 400,
-            },
-            TOPPING_SPICE: {
-                type: "TOPPING_SPICE",
-                price: 500,
-                ccal: 700,
-            },
-        },
-    }
-    sizes: {
-        S: 200,
-        L: 300,
-        M: 400,
-    },
-    addSize() {
-        console.log(Object.entries(this.sizes));
-    };
-    addTopping() {
+const galleryItemsRef = document.querySelector('.gallery');
 
-    };
-    removeTopping() {
-
-    };
-    getStuffing() {
-        return this.toppings = []
-    };
-    calculatePrice() {
-
-    };
-    calculateCalories() {
-
-    };
-    showError() {
-        if () {
-
-        };
-    }
+function createGalleryItem({ preview, original, description }) {
+  return `<div class="gallery__item">
+  <a class="gallery__link" href="${original}">
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</div>`;
 }
+function createGalleryList(galleryItems, createGalleryItem) {
+  return galleryItems.map(galleryItem => createGalleryItem(galleryItem)).join('');
+}
+
+galleryItemsRef.insertAdjacentHTML('beforeend', createGalleryList(galleryItems, createGalleryItem));
+
+galleryItemsRef.addEventListener('click', openModal);
+
+const basicLightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+  captionPosition: 'bottom',
+});
+
+function openModal(event) {
+  event.preventDefault;
+  if (event.target.classList.contains('.gallery__image')) {
+    const instance = basicLightbox.create(
+      `<img src="${event.target.dataset.source}" width="800" height="600">`
+    );
+    instance.show();
+  }
+}
+
+document.addEventListener('keydown', onEscClick);
+function onEscClick(event) {
+  if (event.code === 'Escape') {
+    instance.close();
+  }
+}
+
+// function keydownEscape(event) {
+//   if (event.key === "Escape") {
+//     instance.close();
+//   }
+// }
+// console.log(galleryItems);
