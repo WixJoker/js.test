@@ -1,24 +1,17 @@
-const buttons = [
-  { label: 'Adams', color: '#42C325' },
-  { label: 'Boston', color: '#FA8A06' },
-  { label: 'Chicago', color: '#B9C325' },
-  { label: 'Denver', color: '#74AAF4' },
-  { label: 'Easy', color: '#E339D0' },
-  { label: 'Frank', color: '#E0214A' },
-];
+import Player from '@vimeo/player';
+import throttle from 'lodash.throttle';
 
-const btn = document.querySelector('body');
+const iframe = document.querySelector('iframe');
+const player = new Player(iframe);
+const LOCALSTORAGE_KEY = 'videoplayer-current-time';
+const currentTime = localStorage.getItem(LOCALSTORAGE_KEY);
 
-const makeButtons = options => {
-  return options.map(({ color, label }) => {
-    const buttonRef = document.createElement('button');
-    buttonRef.type = 'button';
-    buttonRef.classList.add('hero-button');
-    buttonRef.style.color = color;
-    buttonRef.textContent = label;
-
-    return buttonRef;
-  });
-};
-const elements = makeButtons(buttons);
-btn.append(...elements);
+if (currentTime) {
+  player.setCurrentTime(currentTime);
+}
+player.on(
+  'timeupdate',
+  throttle(data => {
+    localStorage.setItem(LOCALSTORAGE_KEY, data.seconds);
+  }, 1000)
+);
